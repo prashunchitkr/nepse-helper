@@ -1,0 +1,11 @@
+{
+  "extends": "@nepse-helper/typescript-config/node-library.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "lib": ["DOM"],
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
