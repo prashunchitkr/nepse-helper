@@ -11,7 +11,8 @@
         "dist/**",
         "public/**",
         "!.next/server/**"
-      ]
+      ],
+      "env": ["NODE_TLS_REJECT_UNAUTHORIZED"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -23,5 +24,6 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": ["NODE_TLS_REJECT_UNAUTHORIZED"]
 }
