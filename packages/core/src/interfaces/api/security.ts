@@ -1,4 +1,4 @@
-export interface SecurityBrief {
+export interface ISecurityBrief {
   id: number;
   symbol: string;
   securityName: string;
@@ -6,7 +6,7 @@ export interface SecurityBrief {
   activeStatus: string;
 }
 
-export interface SecurityDetail {
+export interface ISecurityDetail {
   securityDailyTradeDto: SecurityDailyTradeDto;
   security: Security;
   stockListedShares: number;

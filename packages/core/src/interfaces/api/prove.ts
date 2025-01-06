@@ -1,4 +1,4 @@
-export interface Prove {
+export interface IProve {
   serverTime: number;
   salt: string;
   accessToken: string;

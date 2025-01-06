@@ -1,4 +1,4 @@
-export interface TodaysPrice {
+export interface ITodaysPrice {
   content: Content[];
   pageable: Pageable;
   last: boolean;
@@ -12,7 +12,7 @@ export interface TodaysPrice {
   empty: boolean;
 }
 
-export interface Content {
+interface Content {
   id: any;
   businessDate: string;
   securityId: number;

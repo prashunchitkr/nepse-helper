@@ -1,24 +1,30 @@
-import { ENDPOINTS, USER_AGENT } from "../consts/api";
+import { ENDPOINTS, nepseApi, USER_AGENT } from "../consts/api";
 import { CssWasmExports } from "../interfaces";
 
 export class TokenHelper {
   private readonly wasm: CssWasmExports;
+  private static _instance: TokenHelper;
 
   private constructor(wasm: CssWasmExports) {
     this.wasm = wasm;
   }
 
-  public static async create(): Promise<TokenHelper> {
-    const wasm = await WebAssembly.instantiateStreaming(
-      fetch(ENDPOINTS.CSS_WASM_URL, {
-        headers: {
-          "User-Agent": USER_AGENT,
-          Referer: ENDPOINTS.NEPSE_URL,
+  public static async instance(): Promise<TokenHelper> {
+    if (!this._instance) {
+      const buffer = await fetch(
+        `${ENDPOINTS.NEPSE_URL}/${ENDPOINTS.CSS_WASM_URL}`,
+        {
+          headers: {
+            Referer: ENDPOINTS.NEPSE_URL,
+            "User-Agent": USER_AGENT,
+          },
         },
-      }),
-    );
-    const exports = wasm.instance.exports as CssWasmExports;
-    return new TokenHelper(exports);
+      ).then((res) => res.arrayBuffer());
+      const wasm = await WebAssembly.instantiate(buffer);
+      const exports = wasm.instance.exports as CssWasmExports;
+      this._instance = new TokenHelper(exports);
+    }
+    return this._instance;
   }
 
   public encodeAccessToken(accessToken: string, salts: number[]): string {

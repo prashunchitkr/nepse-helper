@@ -16,7 +16,8 @@
   "module": "lib/index.ts",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "dev": "tsc -w"
   },
   "devDependencies": {
     "@nepse-helper/typescript-config": "workspace:*",
