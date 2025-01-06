@@ -1,6 +1,8 @@
 import { Auth, Market, Security } from "./api";
 import { TokenHelper } from "./helpers/token.helper";
 
+export * from "./interfaces/api";
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export class Nepse {
