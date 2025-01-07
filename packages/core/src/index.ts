@@ -14,7 +14,8 @@ export class Nepse {
     this._security = security;
   }
 
-  public getMarketStatus = async () => this._nepseData.getMarketOpen();
+  public getMarketStatus = async () =>
+    this._auth.refreshToken().then(() => this._nepseData.getMarketOpen());
 
   public getSecurityList = async () =>
     this._auth.refreshToken().then(() => this._security.getSecurityList());
