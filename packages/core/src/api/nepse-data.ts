@@ -42,11 +42,6 @@ export class NepseData {
 
     const pageSize = 500;
 
-    const searchParams = new URLSearchParams({
-      page: "0",
-      size: pageSize.toString(),
-    });
-
     const initialPage = await this._getTodayPrice(id, pageSize, 0);
 
     const totalPages = initialPage.totalPages;
