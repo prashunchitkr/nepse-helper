@@ -6,7 +6,7 @@ export class Market {
 
   public async getMarketOpen(): Promise<IMarketOpen> {
     const resp = await this._axios
-      .get<IMarketOpen>(ENDPOINTS.MARKET_OPEN)
+      .get<IMarketOpen>(ENDPOINTS.api.nots.nepseData.getMarketOpen)
       .then((res) => res.data);
 
     return resp;

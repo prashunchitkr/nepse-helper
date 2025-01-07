@@ -17,7 +17,7 @@ export class Auth {
 
   public async authenticate() {
     const prove = await this._axios
-      .get<IProve>(ENDPOINTS.PROVE_URL)
+      .get<IProve>(ENDPOINTS.api.authenticate.getProve)
       .then((res) => res.data);
 
     const NEPAL_HOUR_OFFSET = 5.75;
@@ -53,7 +53,7 @@ export class Auth {
 
   public async refreshToken() {
     const prove = await this._axios
-      .post<IProve>(ENDPOINTS.REFRESH_TOKEN_URL, {
+      .post<IProve>(ENDPOINTS.api.authenticate.refreshToken, {
         refreshToken: tokenStore.get("refreshToken"),
       })
       .then((resp) => resp.data);

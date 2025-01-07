@@ -15,7 +15,7 @@ export class Security {
       return this.securities;
     }
     const response = await this._axios
-      .get<ISecurityBrief[]>(ENDPOINTS.SECURITIES)
+      .get<ISecurityBrief[]>(ENDPOINTS.api.nots.security.getSecurities)
       .then((res) => res.data);
 
     const activeSecurities = response
@@ -43,9 +43,12 @@ export class Security {
     }
 
     const response = await this._axios
-      .post<ISecurityDetail>(`${ENDPOINTS.SECURITY(security.id)}`, {
-        id: tokenStore.get("magicNumber"),
-      })
+      .post<ISecurityDetail>(
+        `${ENDPOINTS.api.nots.security.getSecurity(security.id)}`,
+        {
+          id: tokenStore.get("magicNumber"),
+        },
+      )
       .then((res) => res.data);
 
     return response;

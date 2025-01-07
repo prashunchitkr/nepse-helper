@@ -3,8 +3,6 @@ import { TokenHelper } from "./helpers/token.helper";
 
 export * from "./interfaces/api";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
 export class Nepse {
   private readonly _auth: Auth;
   private readonly _market: Market;

@@ -12,10 +12,10 @@ export class TokenHelper {
   public static async instance(): Promise<TokenHelper> {
     if (!this._instance) {
       const buffer = await fetch(
-        `${ENDPOINTS.NEPSE_URL}/${ENDPOINTS.CSS_WASM_URL}`,
+        `${ENDPOINTS.baseUrl}/${ENDPOINTS.assets.prod.cssWasm}`,
         {
           headers: {
-            Referer: ENDPOINTS.NEPSE_URL,
+            Referer: ENDPOINTS.baseUrl,
             "User-Agent": USER_AGENT,
           },
         },
