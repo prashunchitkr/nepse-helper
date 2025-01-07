@@ -31,7 +31,7 @@ export interface SecurityDailyTradeDto {
   lastTradedPrice: number;
   previousClose: number;
   businessDate: string;
-  closePrice: any;
+  closePrice: number | null;
   fiftyTwoWeekHigh: number;
   fiftyTwoWeekLow: number;
   lastUpdatedDateTime: string;

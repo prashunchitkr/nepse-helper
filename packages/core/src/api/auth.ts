@@ -3,14 +3,14 @@ import { tokenStore } from "../consts/store/store";
 import { getMagicNumberFor } from "../helpers/magic-number.helper";
 import { TokenHelper } from "../helpers/token.helper";
 import { IProve } from "../interfaces";
-import { Market } from "./market";
+import { NepseData } from "./nepse-data";
 
 export class Auth {
   private readonly _axios = nepseApi;
-  private readonly marketWrapper: Market;
+  private readonly marketWrapper: NepseData;
   private readonly tokenHelper: TokenHelper;
 
-  public constructor(marketWrapper: Market, tokenHelper: TokenHelper) {
+  public constructor(marketWrapper: NepseData, tokenHelper: TokenHelper) {
     this.marketWrapper = marketWrapper;
     this.tokenHelper = tokenHelper;
   }
@@ -39,6 +39,7 @@ export class Auth {
         prove.refreshToken,
         salts,
       ),
+      initialMagicNumbers: salts,
       magicNumbers: salts,
       serverDay: nepalDate.getDate(),
     });

@@ -1,23 +1,26 @@
-import { Auth, Market, Security } from "./api";
+import { Auth, NepseData, Security } from "./api";
 import { TokenHelper } from "./helpers/token.helper";
 
 export * from "./interfaces/api";
 
 export class Nepse {
   private readonly _auth: Auth;
-  private readonly _market: Market;
+  private readonly _nepseData: NepseData;
   private readonly _security: Security;
 
-  constructor(auth: Auth, market: Market, security: Security) {
+  constructor(auth: Auth, nepseData: NepseData, security: Security) {
     this._auth = auth;
-    this._market = market;
+    this._nepseData = nepseData;
     this._security = security;
   }
 
-  public getMarketStatus = async () => this._market.getMarketOpen();
+  public getMarketStatus = async () => this._nepseData.getMarketOpen();
 
   public getSecurityList = async () =>
     this._auth.refreshToken().then(() => this._security.getSecurityList());
+
+  public getTodayPrice = async () =>
+    this._auth.refreshToken().then(() => this._nepseData.getTodayPrice());
 
   public getSecurityDetail = async (symbol: string) =>
     this._auth
@@ -28,11 +31,11 @@ export class Nepse {
 export class NepseBuilder {
   public static async build() {
     const tokenHelper = await TokenHelper.instance();
-    const market = new Market();
-    const auth = new Auth(market, tokenHelper);
+    const nepseData = new NepseData();
+    const auth = new Auth(nepseData, tokenHelper);
     await auth.authenticate();
     const security = new Security();
 
-    return new Nepse(auth, market, security);
+    return new Nepse(auth, nepseData, security);
   }
 }

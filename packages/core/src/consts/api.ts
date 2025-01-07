@@ -28,6 +28,7 @@ export const ENDPOINTS = {
       nepseData: {
         getMarketOpen: "api/nots/nepse-data/market-open",
         getTodayPrice: "api/nots/nepse-data/today-price",
+        getFloorSheet: "api/nots/nepse-data/floorsheet",
       },
       security: {
         getSecurities: "api/nots/security?nonDelisted=true",

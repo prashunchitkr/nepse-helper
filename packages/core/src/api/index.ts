@@ -1,3 +1,3 @@
 export * from "./auth";
-export * from "./market";
+export * from "./nepse-data";
 export * from "./security";

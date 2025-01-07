@@ -22,6 +22,7 @@ export class Store<T> implements IStore<T> {
 interface TokenStore {
   accessToken: string;
   refreshToken: string;
+  initialMagicNumbers: number[];
   magicNumbers: number[];
   magicNumber: number;
   serverDay: number;
@@ -30,6 +31,7 @@ interface TokenStore {
 export const tokenStore = new Store<TokenStore>({
   accessToken: "",
   refreshToken: "",
+  initialMagicNumbers: [],
   magicNumbers: [],
   magicNumber: 0,
   serverDay: 0,
