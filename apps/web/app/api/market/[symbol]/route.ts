@@ -1,5 +1,5 @@
 import { nepse } from "@/lib/nepse";
-import { ISecurityDetail } from "@nepse-helper/core/dist/interfaces";
+import { ISecurityDetail } from "@nepse-helper/core";
 import { NextRequest, NextResponse } from "next/server";
 
 interface Params {

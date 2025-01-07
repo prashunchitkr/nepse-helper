@@ -49,6 +49,5 @@ export const nepseApi = axios.create({
 
 nepseApi.interceptors.request.use((request) => {
   request.headers["Authorization"] = `Salter ${tokenStore.get("accessToken")}`;
-  console.debug("Request", request.url);
   return request;
 });
