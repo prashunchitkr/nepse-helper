@@ -2,7 +2,7 @@ import { ENDPOINTS, nepseApi } from "../consts/api";
 import { tokenStore } from "../consts/store/store";
 import { getMagicNumberFor } from "../helpers/magic-number.helper";
 import { TokenHelper } from "../helpers/token.helper";
-import { IProve } from "../interfaces";
+import { IProve } from "../interfaces/api";
 import { NepseData } from "./nepse-data";
 
 export class Auth {

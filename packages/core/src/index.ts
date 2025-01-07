@@ -1,9 +1,11 @@
 import { Auth, NepseData, Security } from "./api";
 import { TokenHelper } from "./helpers/token.helper";
+import { INepse } from "./interfaces";
 
 export * from "./interfaces/api";
+export { INepse } from "./interfaces";
 
-class Nepse {
+class Nepse implements INepse {
   private readonly _auth: Auth;
   private readonly _nepseData: NepseData;
   private readonly _security: Security;
@@ -30,7 +32,7 @@ class Nepse {
 }
 
 export class NepseBuilder {
-  public static async build() {
+  public static async build(): Promise<INepse> {
     const tokenHelper = await TokenHelper.instance();
     const nepseData = new NepseData();
     const auth = new Auth(nepseData, tokenHelper);

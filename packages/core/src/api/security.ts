@@ -1,16 +1,13 @@
 import { ENDPOINTS, nepseApi } from "../consts/api";
 import { tokenStore } from "../consts/store/store";
-import { getMagicNumberFor } from "../helpers/magic-number.helper";
-import { ISecurityBrief, ISecurityDetail } from "../interfaces";
+import { ISecurityBrief, ISecurityDetail } from "../interfaces/api";
 
 export class Security {
   private readonly _axios = nepseApi;
   // cache securities
-  private securities: Omit<ISecurityBrief, "activeStatus">[] = [];
+  private securities: ISecurityBrief[] = [];
 
-  public async getSecurityList(): Promise<
-    Omit<ISecurityBrief, "activeStatus">[]
-  > {
+  public async getSecurityList(): Promise<ISecurityBrief[]> {
     if (this.securities.length > 0) {
       return this.securities;
     }
@@ -18,14 +15,8 @@ export class Security {
       .get<ISecurityBrief[]>(ENDPOINTS.api.nots.security.getSecurities)
       .then((res) => res.data);
 
-    const activeSecurities = response
-      .filter((security) => security.activeStatus === "A")
-      .map((security) => {
-        const { activeStatus, ...rest } = security;
-        return rest;
-      });
+    this.securities = response;
 
-    this.securities = activeSecurities;
     return this.securities;
   }
 

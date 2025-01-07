@@ -1,5 +1,5 @@
 import { ENDPOINTS, nepseApi, USER_AGENT } from "../consts/api";
-import { CssWasmExports } from "../interfaces";
+import { CssWasmExports } from "../interfaces/wasm-exports";
 
 export class TokenHelper {
   private readonly wasm: CssWasmExports;

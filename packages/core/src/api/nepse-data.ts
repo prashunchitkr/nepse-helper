@@ -1,6 +1,6 @@
 import { ENDPOINTS, nepseApi } from "../consts/api";
 import { tokenStore } from "../consts/store/store";
-import { IMarketOpen, ITodaysPrice } from "../interfaces";
+import { IMarketOpen, ITodaysPrice } from "../interfaces/api";
 
 export class NepseData {
   private readonly _axios = nepseApi;
