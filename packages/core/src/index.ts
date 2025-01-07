@@ -3,7 +3,7 @@ import { TokenHelper } from "./helpers/token.helper";
 
 export * from "./interfaces/api";
 
-export class Nepse {
+class Nepse {
   private readonly _auth: Auth;
   private readonly _nepseData: NepseData;
   private readonly _security: Security;
