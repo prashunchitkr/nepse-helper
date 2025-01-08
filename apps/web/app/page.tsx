@@ -1,7 +1,14 @@
 import { nepse } from "@/lib/nepse";
+import { NepseBuilder } from "@nepse-helper/core";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
+const getPointsDifference = (prevClose: number, lastTraded: number) =>
+  parseFloat((lastTraded - prevClose).toFixed(2));
+
 export const generateMetadata = async (): Promise<Metadata> => {
+  const nepse = await NepseBuilder.build();
   const marketStatus = await nepse.getMarketStatus();
 
   return {
@@ -12,12 +19,15 @@ export const generateMetadata = async (): Promise<Metadata> => {
   };
 };
 
-const getPointsDifference = (prevClose: number, lastTraded: number) =>
-  parseFloat((lastTraded - prevClose).toFixed(2));
-
-export default async function Page() {
+const fetchData = async () => {
   const marketStatus = await nepse.getMarketStatus();
   const marketData = await nepse.getTodayPrice(0, 500);
+
+  return { marketStatus, marketData };
+};
+
+export default async function Page() {
+  const { marketData, marketStatus } = await fetchData();
 
   return (
     <div>
