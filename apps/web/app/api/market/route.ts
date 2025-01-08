@@ -1,10 +1,19 @@
 import { nepse } from "@/lib/nepse";
-import { NextResponse } from "next/server";
+import { PageSize } from "@nepse-helper/core";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  const market = await nepse.getTodayPrice();
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const { searchParams } = new URL(request.url);
 
-  const data = market.map((item) => ({
+  const page = parseInt(searchParams.get("page") || "0", 10);
+  const pageSize = parseInt(
+    searchParams.get("pageSize") || searchParams.get("pagesize") || "500",
+    10,
+  ) as PageSize;
+
+  const market = await nepse.getTodayPrice(page, pageSize);
+
+  const data = market.content.map((item) => ({
     symbol: item.symbol,
     name: item.securityName,
     open: item.openPrice,

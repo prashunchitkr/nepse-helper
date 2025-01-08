@@ -3,11 +3,12 @@ import {
   ISecurityBrief,
   ISecurityDetail,
   ITodaysPrice,
+  PageSize,
 } from "./api";
 
 export interface INepse {
   getMarketStatus(): Promise<IMarketOpen>;
   getSecurityList(): Promise<ISecurityBrief[]>;
-  getTodayPrice(): Promise<ITodaysPrice["content"]>;
+  getTodayPrice(page: number, pageSize: PageSize): Promise<ITodaysPrice>;
   getSecurityDetail(symbol: string): Promise<ISecurityDetail | null>;
 }

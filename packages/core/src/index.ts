@@ -1,6 +1,7 @@
 import { Auth, NepseData, Security } from "./api";
 import { TokenHelper } from "./helpers/token.helper";
 import { INepse } from "./interfaces";
+import { PageSize } from "./interfaces/api";
 
 export * from "./interfaces/api";
 export { INepse } from "./interfaces";
@@ -22,8 +23,10 @@ class Nepse implements INepse {
   public getSecurityList = async () =>
     this._auth.refreshToken().then(() => this._security.getSecurityList());
 
-  public getTodayPrice = async () =>
-    this._auth.refreshToken().then(() => this._nepseData.getTodayPrice());
+  public getTodayPrice = async (page = 0, pageSize: PageSize = 500) =>
+    this._auth
+      .refreshToken()
+      .then(() => this._nepseData.getTodayPrice(page, pageSize));
 
   public getSecurityDetail = async (symbol: string) =>
     this._auth
