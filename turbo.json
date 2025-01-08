@@ -21,21 +21,8 @@
       "dependsOn": ["^check-types"]
     },
     "dev": {
-      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
-    },
-    "pages:build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "dist/**",
-        "public/**",
-        "!.next/server/**"
-      ],
-      "env": ["NODE_TLS_REJECT_UNAUTHORIZED"]
     }
   },
   "globalEnv": ["NODE_TLS_REJECT_UNAUTHORIZED"]

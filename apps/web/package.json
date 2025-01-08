@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit",
-    "pages:build": "npx @cloudflare/next-on-pages"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@nepse-helper/core": "workspace:*",

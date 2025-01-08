@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { nepse } from "@/lib/nepse";
 
-export const dynamic = "force-dynamic";
-
 export async function GET() {
   const status = await nepse.getMarketStatus();
 
