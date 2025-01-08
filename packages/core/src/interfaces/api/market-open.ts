@@ -1,5 +1,5 @@
 export interface IMarketOpen {
-  isOpen: string;
+  isOpen: "OPEN" | "CLOSE";
   asOf: string;
   id: number;
 }
