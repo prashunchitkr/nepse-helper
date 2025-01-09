@@ -1,45 +1,17 @@
-import { nepse } from "@/lib/nepse";
 import { NepseBuilder } from "@nepse-helper/core";
-import { Metadata } from "next";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
 const getPointsDifference = (prevClose: number, lastTraded: number) =>
   parseFloat((lastTraded - prevClose).toFixed(2));
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const nepse = await NepseBuilder.build();
-  const marketStatus = await nepse.getMarketStatus();
-
-  return {
-    title: `NEPSE - ${marketStatus.isOpen}`,
-    description: `Market is ${
-      marketStatus.isOpen
-    }. As of ${new Date(marketStatus.asOf).toLocaleString()} NPT`,
-  };
-};
-
-const fetchData = async () => {
-  const marketStatus = await nepse.getMarketStatus();
-  const marketData = await nepse.getTodayPrice(0, 500);
-
-  return { marketStatus, marketData };
-};
-
 export default async function Page() {
-  const { marketData, marketStatus } = await fetchData();
+  const nepse = await NepseBuilder.build();
+  const marketData = await nepse.getTodayPrice(0, 500);
 
   return (
     <div>
-      <div>
-        <h1>NEPSE Helper API</h1>
-        <p>Welcome to the NEPSE Helper API!</p>
-        <p>
-          Market is <b>{marketStatus.isOpen}</b>. As of{" "}
-          {new Date(marketStatus.asOf).toLocaleString()} NPT
-        </p>
-      </div>
-
       <div>
         <table>
           <thead>
@@ -60,44 +32,34 @@ export default async function Page() {
             </tr>
           </thead>
           <tbody>
-            {marketData.content
-              .sort(
-                (a, b) =>
-                  getPointsDifference(
-                    b.previousDayClosePrice,
-                    b.lastUpdatedPrice,
-                  ) -
-                  getPointsDifference(
-                    a.previousDayClosePrice,
-                    a.lastUpdatedPrice,
-                  ),
-              )
-              .map((item) => (
-                <tr key={item.symbol}>
-                  <td>
+            {marketData.content.map((item) => (
+              <tr key={item.symbol}>
+                <td>
+                  <Link href={`/${item.symbol}`}>
                     <b>{item.symbol}</b>
-                  </td>
-                  <td>{item.securityName}</td>
-                  <td>{item.openPrice}</td>
-                  <td>{item.highPrice}</td>
-                  <td>{item.lowPrice}</td>
-                  <td>{item.closePrice ?? "-"}</td>
-                  <td>{item.previousDayClosePrice}</td>
-                  <td>
-                    {item.lastUpdatedPrice} (
-                    {getPointsDifference(
-                      item.previousDayClosePrice,
-                      item.lastUpdatedPrice,
-                    )}
-                    )
-                  </td>
-                  <td>{item.averageTradedPrice}</td>
-                  <td>{item.fiftyTwoWeekHigh}</td>
-                  <td>{item.fiftyTwoWeekLow}</td>
-                  <td>{item.totalTradedQuantity}</td>
-                  <td>{new Date(item.lastUpdatedTime).toLocaleString()}</td>
-                </tr>
-              ))}
+                  </Link>
+                </td>
+                <td>{item.securityName}</td>
+                <td>{item.openPrice}</td>
+                <td>{item.highPrice}</td>
+                <td>{item.lowPrice}</td>
+                <td>{item.closePrice ?? "-"}</td>
+                <td>{item.previousDayClosePrice}</td>
+                <td>
+                  {item.lastUpdatedPrice} (
+                  {getPointsDifference(
+                    item.previousDayClosePrice,
+                    item.lastUpdatedPrice,
+                  )}
+                  )
+                </td>
+                <td>{item.averageTradedPrice}</td>
+                <td>{item.fiftyTwoWeekHigh}</td>
+                <td>{item.fiftyTwoWeekLow}</td>
+                <td>{item.totalTradedQuantity}</td>
+                <td>{new Date(item.lastUpdatedTime).toLocaleString()}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
