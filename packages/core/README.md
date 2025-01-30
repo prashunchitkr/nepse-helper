@@ -1,5 +1,17 @@
 # @nepse-helper/core
 
-## IMPORTANT: You need to set NODE_TLS_REJECT_UNAUTHORIZED to 0 in environment variable for this library to work
+A helper library built as API wrapper for nepse data
 
-### This is because NEPSE's certificates works in a weird way. Will figure out how to fix it later
+## Usage
+
+```ts
+const nepse = await NepseBuilder.build();
+
+const todayPrice = await nepse.getTodayPrice();
+
+const gbime = await nepse.getSecurityDetail("GBIME");
+```
+
+## Issues
+
+You might need to add `NODE_TLS_REJECT_UNAUTHORIZED=0` to env variables to avoid SSL errors.
