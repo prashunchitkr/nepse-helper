@@ -13,7 +13,7 @@ export interface ITodaysPrice {
 }
 
 export interface Content {
-  id: any;
+  id: number | null;
   businessDate: string;
   securityId: number;
   symbol: string;
@@ -21,7 +21,7 @@ export interface Content {
   openPrice: number;
   highPrice: number;
   lowPrice: number;
-  closePrice: number | any;
+  closePrice: number | null;
   totalTradedQuantity: number;
   totalTradedValue: number;
   previousDayClosePrice: number;

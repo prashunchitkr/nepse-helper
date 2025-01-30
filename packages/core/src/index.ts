@@ -3,8 +3,8 @@ import { TokenHelper } from "./helpers/token.helper";
 import { INepse } from "./interfaces";
 import { PageSize } from "./interfaces/api";
 
-export * from "./interfaces/api";
 export { INepse } from "./interfaces";
+export * from "./interfaces/api";
 
 class Nepse implements INepse {
   private readonly _auth: Auth;
